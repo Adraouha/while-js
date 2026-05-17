@@ -1,268 +1,263 @@
-# Ejercicios While con JavaScript
-
-```html
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ejercicios While</title>
+    <meta charset="UTF-8">
+    <title>Suma Iterativa</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
 
-    body {
-      background: #f4f4f4;
-      padding: 40px;
-      display: flex;
-      justify-content: center;
-    }
+        h1 {
+            text-align: center;
+            color: red;
+        }
 
-    .container {
-      width: 100%;
-      max-width: 900px;
-      display: grid;
-      gap: 30px;
-    }
+        button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgb(255, 0, 0);
+            color: white;
+            cursor: pointer;
 
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
+        }
 
-    h1 {
-      margin-bottom: 20px;
-      color: #222;
-      font-size: 28px;
-    }
+        #resultado {
+            display: block;
+            margin-top: 20px;
+            background-color: #f2f2f2;
+            padding: 15px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+            border: 1px solid rgb(255, 0, 0);
 
-    h2 {
-      margin-bottom: 20px;
-      color: #333;
-      font-size: 22px;
-    }
+        }
 
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 12px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      outline: none;
-      font-size: 16px;
-    }
+        #resultado2 {
+            display: block;
+            margin-top: 20px;
+            background-color: #f2f2f2;
+            padding: 15px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+            border: 1px solid rgb(255, 0, 0);
+            margin-bottom: 30px;
 
-    input:focus {
-      border-color: #555;
-    }
+        }
 
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background: #222;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-      margin-bottom: 15px;
-    }
+        .ejercicio3 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+            font-family: Arial;
+            border: 1px solid rgb(255, 0, 0);
 
-    button:hover {
-      background: #444;
-    }
 
-    .resultado {
-      margin-top: 15px;
-      padding: 15px;
-      background: #f1f1f1;
-      border-radius: 10px;
-    }
+        }
 
-    .historial {
-      margin-top: 15px;
-      max-height: 160px;
-      overflow-y: auto;
-      font-size: 14px;
-      color: #555;
-    }
+        .texto {
+            font-family: monospace;
+            border-top: 2px solid rgb(247, 2, 2);
+            border-bottom: 2px solid rgb(250, 5, 5);
+            background-color: black;
+            color: white;
+            padding: 10px;
 
-    .historial p {
-      margin-bottom: 6px;
-    }
-  </style>
+        }
+
+        .ganador {
+            color: #1b59df;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            animation: tictoc 2s infinite;
+
+        }
+
+        .perdedor {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+            animation: tictoc 2s infinite;
+
+        }
+
+        @keyframes tictoc {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <div class="container">
+    <h1>Suma iterativa de números </h1>
+    <div style='display: flex; flex-direction: column; align-items: center; gap: 10px;'>
 
-    <h1>Práctica de Bucles While</h1>
+        <button style='margin: 10px auto; display: block;' onclick="iniciarPrograma()">Empezar</button>
 
-    <!-- EJERCICIO 1 -->
-    <section class="card">
+        <div id="resultado">
 
-      <h2>Suma Iterativa</h2>
+        </div>
+    </div>
 
-      <input type="number" id="num1" placeholder="Primer número">
-      <input type="number" id="num2" placeholder="Segundo número">
-
-      <button onclick="sumar()">Sumar</button>
-
-      <div class="resultado" id="resultado">
-        Resultado: 0
-      </div>
-
-      <div class="historial" id="historialSuma"></div>
-
-    </section>
+    <!--EJERCICIO 2: Acumulador y Contador -->
 
 
-    <!-- EJERCICIO 2 -->
-    <section class="card">
+    <h1>Acumulador y contador de números</h1>
+    <div style='display: flex; flex-direction: column; align-items: center; gap: 10px;'>
 
-      <h2>Números Positivos / Negativos</h2>
+        <button onclick="empezar()">Introducir números</button>
 
-      <input type="number" id="numero" placeholder="Introduce un número">
-
-      <button onclick="agregarNumero()">
-        Enviar número
-      </button>
-
-      <div class="resultado">
-
-        <p><strong>Suma total:</strong>
-          <span id="suma">0</span>
-        </p>
-
-        <br>
-
-        <p><strong>Cantidad de números:</strong>
-          <span id="contador">0</span>
-        </p>
-
-        <br>
-
-        <p id="estado">
-          Esperando números...
-        </p>
-
-      </div>
-
-      <div class="historial" id="historial"></div>
-
-    </section>
-
-  </div>
+        <div id="resultado2"></div>
+    </div>
 
 
-  <script>
-
-    // =========================
-    // EJERCICIO 1
-    // =========================
-
-    let continuar = true;
-
-    function sumar() {
-
-      if (!continuar) return;
-
-      let num1 = parseFloat(document.getElementById("num1").value);
-      let num2 = parseFloat(document.getElementById("num2").value);
-
-      if (isNaN(num1) || isNaN(num2)) {
-        alert("Introduce números válidos");
-        return;
-      }
-
-      let suma = num1 + num2;
-
-      document.getElementById("resultado").innerHTML =
-        "Resultado: " + suma;
-
-      document.getElementById("historialSuma").innerHTML += `
-        <p>${num1} + ${num2} = <strong>${suma}</strong></p>
-      `;
-
-      let respuesta = confirm("¿Quieres continuar?");
-
-      if (!respuesta) {
-
-        continuar = false;
-
-        document.querySelectorAll("button")[0].disabled = true;
-        document.querySelectorAll("button")[0].innerText = "Finalizado";
-
-        alert("¡Hasta luego!");
-      }
-
-      document.getElementById("num1").value = "";
-      document.getElementById("num2").value = "";
-    }
+    <div class="ejercicio3">
+        <h1>¿Quién gana el premio?</h1>
 
 
-    // =========================
-    // EJERCICIO 2
-    // =========================
+        <button onclick="comprobarGanador()">Comprobar</button>
 
-    let sumaTotal = 0;
-    let contador = 0;
-    let activo = true;
+        <div id="carrera"></div>
 
-    function agregarNumero() {
 
-      if (!activo) return;
+    </div>
 
-      let numero = parseFloat(
-        document.getElementById("numero").value
-      );
 
-      if (isNaN(numero)) {
-        alert("Introduce un número válido");
-        return;
-      }
 
-      contador++;
 
-      document.getElementById("historial").innerHTML += `
-        <p>Número ${contador}: ${numero}</p>
-      `;
 
-      if (numero < 0) {
 
-        activo = false;
 
-        document.getElementById("estado").innerHTML =
-          "Bucle finalizado por número negativo";
 
-        document.querySelectorAll("button")[1].disabled = true;
-        document.querySelectorAll("button")[1].innerText = "Finalizado";
+    <script>
 
-      } else {
+        function iniciarPrograma() {
 
-        sumaTotal += numero;
+            let continuar = "S";
+            let texto = "<div class='texto'>|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</div>";
 
-      }
+            while (continuar === "S") {
 
-      document.getElementById("suma").innerText = sumaTotal;
+                let num1 = Number(prompt("Introduce el primer número"));
+                let num2 = Number(prompt("Introduce el segundo número"));
 
-      document.getElementById("contador").innerText = contador;
+                let suma = num1 + num2;
 
-      document.getElementById("numero").value = "";
+                texto += `
+      <p>
+        ${num1} + ${num2} = <strong style='color: red;'>${suma}</strong>
+      </p>
+    `;
 
-    }
+                continuar = prompt("¿Quieres continuar? (S/N)").toUpperCase();
+            }
+            texto += "<h3 style='text-align: center; color: red;'>Hasta luego! Espero que vuelvas pronto.</h3>";
+            texto += "<div class='texto'>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</div>";
 
-  </script>
+            document.getElementById("resultado").innerHTML = texto;
+        }
+
+
+
+
+        //ejecicio 2: en un bucle, pides números al usuario hasta que escriba un número negativo.
+
+        function empezar() {
+
+            let numero = 0;
+            let sumaTotal = 0;
+            let contador = 0;
+            let texto = "";
+
+            while (numero >= 0) {
+
+                numero = Number(prompt("Introduce un número"));
+
+                if (numero >= 0) {
+
+                    sumaTotal += numero;
+                    contador++;
+
+                    texto += `<p>Número introducido (${contador}): <strong style='color: red;'>${numero}</strong></p>`;
+                }
+            }
+
+            texto += `
+            <div class='texto'>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</div>
+            <h3 style='color: red; text-align: center;'>Has introducido un número negativo</h3>
+            <p><strong>Suma total:</strong> <strong style='color: blue;'>${sumaTotal}</strong></p>
+            <p><strong>Cantidad de números:</strong> <strong style='color: blue;'>${contador}</strong></p>
+            <div class='texto'>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</div>
+  `;
+
+            document.getElementById("resultado2").innerHTML = texto;
+        }
+
+
+
+
+        //Ejercicio 3: ganador de premios de comida
+
+        function comprobarGanador() {
+
+            let nacionalidad = prompt("¿Cuál es tu nacionalidad?").toLowerCase();
+
+            let comida = prompt("¿Qué comes?").toLowerCase();
+
+            let resultado = document.getElementById("carrera");
+
+            if (
+                (nacionalidad === "valenciano" && comida === "galletas") ||
+                (nacionalidad === "francés" && comida === "yogur") ||
+                (nacionalidad !== "chino" && comida === "fideos")
+            ) {
+
+                carrera.innerHTML = `
+      <p class="ganador">
+        ¡Has ganado el primer premio!
+      </p>
+    `;
+
+            } else {
+
+                carrera.innerHTML = `
+      <p class="perdedor">
+        No has ganado el premio
+      </p>
+    `;
+            }
+        }
+
+
+    </script>
+
+
+
+
+
 
 </body>
 
