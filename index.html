@@ -1,0 +1,269 @@
+# Ejercicios While con JavaScript
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ejercicios While</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f4f4;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #222;
+      font-size: 28px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 22px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    input:focus {
+      border-color: #555;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #222;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-bottom: 15px;
+    }
+
+    button:hover {
+      background: #444;
+    }
+
+    .resultado {
+      margin-top: 15px;
+      padding: 15px;
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .historial {
+      margin-top: 15px;
+      max-height: 160px;
+      overflow-y: auto;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .historial p {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Práctica de Bucles While</h1>
+
+    <!-- EJERCICIO 1 -->
+    <section class="card">
+
+      <h2>Suma Iterativa</h2>
+
+      <input type="number" id="num1" placeholder="Primer número">
+      <input type="number" id="num2" placeholder="Segundo número">
+
+      <button onclick="sumar()">Sumar</button>
+
+      <div class="resultado" id="resultado">
+        Resultado: 0
+      </div>
+
+      <div class="historial" id="historialSuma"></div>
+
+    </section>
+
+
+    <!-- EJERCICIO 2 -->
+    <section class="card">
+
+      <h2>Números Positivos / Negativos</h2>
+
+      <input type="number" id="numero" placeholder="Introduce un número">
+
+      <button onclick="agregarNumero()">
+        Enviar número
+      </button>
+
+      <div class="resultado">
+
+        <p><strong>Suma total:</strong>
+          <span id="suma">0</span>
+        </p>
+
+        <br>
+
+        <p><strong>Cantidad de números:</strong>
+          <span id="contador">0</span>
+        </p>
+
+        <br>
+
+        <p id="estado">
+          Esperando números...
+        </p>
+
+      </div>
+
+      <div class="historial" id="historial"></div>
+
+    </section>
+
+  </div>
+
+
+  <script>
+
+    // =========================
+    // EJERCICIO 1
+    // =========================
+
+    let continuar = true;
+
+    function sumar() {
+
+      if (!continuar) return;
+
+      let num1 = parseFloat(document.getElementById("num1").value);
+      let num2 = parseFloat(document.getElementById("num2").value);
+
+      if (isNaN(num1) || isNaN(num2)) {
+        alert("Introduce números válidos");
+        return;
+      }
+
+      let suma = num1 + num2;
+
+      document.getElementById("resultado").innerHTML =
+        "Resultado: " + suma;
+
+      document.getElementById("historialSuma").innerHTML += `
+        <p>${num1} + ${num2} = <strong>${suma}</strong></p>
+      `;
+
+      let respuesta = confirm("¿Quieres continuar?");
+
+      if (!respuesta) {
+
+        continuar = false;
+
+        document.querySelectorAll("button")[0].disabled = true;
+        document.querySelectorAll("button")[0].innerText = "Finalizado";
+
+        alert("¡Hasta luego!");
+      }
+
+      document.getElementById("num1").value = "";
+      document.getElementById("num2").value = "";
+    }
+
+
+    // =========================
+    // EJERCICIO 2
+    // =========================
+
+    let sumaTotal = 0;
+    let contador = 0;
+    let activo = true;
+
+    function agregarNumero() {
+
+      if (!activo) return;
+
+      let numero = parseFloat(
+        document.getElementById("numero").value
+      );
+
+      if (isNaN(numero)) {
+        alert("Introduce un número válido");
+        return;
+      }
+
+      contador++;
+
+      document.getElementById("historial").innerHTML += `
+        <p>Número ${contador}: ${numero}</p>
+      `;
+
+      if (numero < 0) {
+
+        activo = false;
+
+        document.getElementById("estado").innerHTML =
+          "Bucle finalizado por número negativo";
+
+        document.querySelectorAll("button")[1].disabled = true;
+        document.querySelectorAll("button")[1].innerText = "Finalizado";
+
+      } else {
+
+        sumaTotal += numero;
+
+      }
+
+      document.getElementById("suma").innerText = sumaTotal;
+
+      document.getElementById("contador").innerText = contador;
+
+      document.getElementById("numero").value = "";
+
+    }
+
+  </script>
+
+</body>
+
+</html>
